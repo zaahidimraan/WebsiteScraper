@@ -17,7 +17,11 @@ max_depth = st.number_input("Enter the maximum depth for recursive scraping:", m
 
 # Scrape button
 if st.button("Scrape"):
-    if url:
+    # Send a GET request to the URL
+    response = requests.get(url)
+    
+    # Check if the request was successful
+    if response.status_code == 200:
         # Perform scraping
         scraped_data = scrape_website(url, max_depth=max_depth)
 
