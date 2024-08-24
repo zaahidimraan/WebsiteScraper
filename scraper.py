@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 from urllib.parse import urljoin, urlparse
+import argparse  # Import the argparse module for handling command-line arguments
 
 def scrape_website(url, visited_urls=None, max_depth=2, current_depth=0):
     if visited_urls is None:
@@ -73,10 +74,23 @@ def save_to_json(data, filename):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 # URL of the website you want to scrape
-url = "https://jnsedu.com/"  # Replace with the actual URL
+# Set a default URL
+default_url = "https://jnsedu.com/"
+
+# Create an argument parser
+parser = argparse.ArgumentParser(description="Web Scraping Project")
+
+# Add an optional argument for the URL
+parser.add_argument("--url", help="URL to scrape (overrides default)")
+
+# Parse the arguments
+args = parser.parse_args()
+
+# Use the provided URL if given, otherwise use the default
+url = args.url if args.url else default_url
 
 # Scrape the website
-scraped_data = scrape_website(url)
+scraped_data = scrape_website(url, max_depth=2)
 
 if scraped_data:
     # Save the scraped data to a JSON file
