@@ -16,12 +16,12 @@ def scrape_website(url):
         data = []
         
         # Find all article elements (adjust this based on the website structure)
-        articles = soup.find_all('section')
-        print(f"Found {len(articles)} articles on the webpage.")
+        articles = soup.find_all()
+        print(f"Found {len(articles)} elements on the webpage.")
         
         for article in articles:
             # Extract information from each article (adjust selectors as needed)
-            title = article.find('h2').text.strip() if article.find('h2') else 'No title'
+            title = article.find(['h1','h2','h3','h4','h5','h6']).text.strip() if article.find(['h1','h2','h3','h4','h5','h6']) else 'No title'
             summary = article.find('p').text.strip() if article.find('p') else 'No summary'
             link = article.find('a')['href'] if article.find('a') else 'No link'
             
@@ -33,8 +33,12 @@ def scrape_website(url):
             }
             
             # Add the article data to our list
-            data.append(article_data)
-        print(f"Scraped {len(data)} articles.")
+            # Duplicate data check
+            # summary and link are not 'No summary' and 'No link' respectively
+            if article_data['summary'] != 'No summary' or article_data['link'] != 'No link':
+                if article_data not in data:
+                    data.append(article_data)
+        print(f"Scraped {len(data)} elements.")
         
         return data
     else:
