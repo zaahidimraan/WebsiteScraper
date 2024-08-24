@@ -1,4 +1,5 @@
-# Web Scraping Project [Link](https://websitescraper.streamlit.app/)
+# Web Scraping Project
+You can interact with Scraper: [Link](https://websitescraper.streamlit.app/)
 
 This project focuses on extracting data from website using Python's `requests` library for fetching web pages and `BeautifulSoup` for parsing HTML content. 
 
