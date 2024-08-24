@@ -16,7 +16,7 @@ def scrape_website(url):
         data = []
         
         # Find all article elements (adjust this based on the website structure)
-        articles = soup.find_all('article')
+        articles = soup.find_all('section')
         print(f"Found {len(articles)} articles on the webpage.")
         
         for article in articles:
