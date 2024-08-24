@@ -5,6 +5,6 @@ This project focuses on extracting data from website using Python's `requests` l
 ## Project Structure
 
 * `scraper.py`:  Main Python script containing the web scraping logic.
+* `app.py` : Streamlit app to make the UI for easy access
 * `requirements.txt`:  Lists the project dependencies.
 * `README.md`:  This file providing an overview of the project.
-* `data/`: (Optional) Directory to store the scraped data.
