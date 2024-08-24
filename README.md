@@ -1,6 +1,6 @@
 # Web Scraping Project
 
-This project focuses on extracting data from [target website] using Python's `requests` library for fetching web pages and `BeautifulSoup` for parsing HTML content. 
+This project focuses on extracting data from website using Python's `requests` library for fetching web pages and `BeautifulSoup` for parsing HTML content. 
 
 ## Project Structure
 
