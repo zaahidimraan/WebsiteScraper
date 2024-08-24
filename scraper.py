@@ -50,7 +50,7 @@ def scrape_website(url, visited_urls=None, max_depth=2, current_depth=0):
             # Add the article data to our list
             # Duplicate data check
             # summary and link are not 'No summary' and 'No link' respectively
-            if article_data['summary'] != 'No summary' or article_data['link'] != 'No link':
+            if article_data['summary'] != 'No summary':
                 if article_data not in data:
                     data.append(article_data)
         
