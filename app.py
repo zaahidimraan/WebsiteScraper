@@ -1,4 +1,4 @@
-from scraper.py import scrape_website
+from scraper import scrape_website
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup

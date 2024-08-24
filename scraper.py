@@ -73,28 +73,29 @@ def save_to_json(data, filename):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-# URL of the website you want to scrape
-# Set a default URL
-default_url = "https://jnsedu.com/"
+if __name__ == "__main__":
+    # URL of the website you want to scrape
+    # Set a default URL
+    default_url = "https://jnsedu.com/"
 
-# Create an argument parser
-parser = argparse.ArgumentParser(description="Web Scraping Project")
+    # Create an argument parser
+    parser = argparse.ArgumentParser(description="Web Scraping Project")
 
-# Add an optional argument for the URL
-parser.add_argument("--url", help="URL to scrape (overrides default)")
+    # Add an optional argument for the URL
+    parser.add_argument("--url", help="URL to scrape (overrides default)")
 
-# Parse the arguments
-args = parser.parse_args()
+    # Parse the arguments
+    args = parser.parse_args()
 
-# Use the provided URL if given, otherwise use the default
-url = args.url if args.url else default_url
+    # Use the provided URL if given, otherwise use the default
+    url = args.url if args.url else default_url
 
-# Scrape the website
-scraped_data = scrape_website(url, max_depth=2)
+    # Scrape the website
+    scraped_data = scrape_website(url, max_depth=2)
 
-if scraped_data:
-    # Save the scraped data to a JSON file
-    save_to_json(scraped_data, 'scraped_data.json')
-    print("Data has been scraped and saved to scraped_data.json")
-else:
-    print("Failed to scrape data from the website.")
+    if scraped_data:
+        # Save the scraped data to a JSON file
+        save_to_json(scraped_data, 'scraped_data.json')
+        print("Data has been scraped and saved to scraped_data.json")
+    else:
+        print("Failed to scrape data from the website.")
