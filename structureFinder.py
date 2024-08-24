@@ -8,6 +8,7 @@ def analyze_structure(url):
         return f"Failed to retrieve the webpage. Status code: {response.status_code}"
 
     soup = BeautifulSoup(response.text, 'html.parser')
+    print(soup.prettify())
     
     structure = {
         "title": soup.title.string if soup.title else "No title found",
