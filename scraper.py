@@ -4,6 +4,20 @@ import json
 from urllib.parse import urljoin, urlparse
 import argparse  # Import the argparse module for handling command-line arguments
 
+def remove_duplicate_articles(data):
+    seen = set()
+    unique_data = []
+
+    for article in data:
+        # Create a tuple of title and summary to use as a unique identifier
+        identifier = (article['title'], article['summary'])
+        
+        if identifier not in seen:
+            seen.add(identifier)
+            unique_data.append(article)
+
+    return unique_data
+
 def scrape_website(url, visited_urls=None, max_depth=2, current_depth=0):
     if visited_urls is None:
         visited_urls = set()
@@ -53,7 +67,8 @@ def scrape_website(url, visited_urls=None, max_depth=2, current_depth=0):
             # summary and link are not 'No summary' and 'No link' respectively
             if article_data['summary'] != 'No summary':
                 if article_data not in data:
-                    data.append(article_data)
+                    if not any(article['summary'] == article_data['summary'] for article in data):
+                        data.append(article_data)
         
         print(f"Scraped {len(data)} elements from {url}.")
         
@@ -63,6 +78,9 @@ def scrape_website(url, visited_urls=None, max_depth=2, current_depth=0):
             # Ensure we only follow links within the same domain
             if urlparse(next_url).netloc == urlparse(url).netloc:
                 data.extend(scrape_website(next_url, visited_urls, max_depth, current_depth + 1))
+                
+        # Remove duplicate articles based on title and summary
+        data = remove_duplicate_articles(data)
         
         return data
     else:
