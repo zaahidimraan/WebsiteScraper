@@ -24,17 +24,13 @@ def json_to_rag_string(json_file_path):
 
     # Iterate through each article in the data
     for article in data:
-        # Add title if it's not 'No Title'
-        if article.get('title', 'No Title') != 'No Title':
-            result += f"Title: {article['title']}. "
+        # Add title if it's not 'No title'
+        if article.get('title', 'No title') != 'No title':
+            result += f"{article['title']}. "
 
-        # Add summary if it's not 'No Summary'
-        if article.get('summary', 'No Summary') != 'No Summary':
-            result += f"Summary: {article['summary']}. "
-
-        # Add content (assumed to always be present and relevant)
-        result += f"Content: {article.get('content', '')}. "
-
+        # Add summary if it's not 'No summary'
+        if article.get('summary', 'No summary') != 'No summary':
+            result += f"{article['summary']}. "
         # Add an extra space between articles for clarity
         result += " "
 
@@ -48,5 +44,8 @@ if rag_string:
     print("RAG String Preview:")
     print(rag_string[:500] + "..." if len(rag_string) > 500 else rag_string)
     print(f"\nTotal characters: {len(rag_string)}")
+    # Save the RAG string to a text file
+    with open("rag_string.txt", 'w', encoding='utf-8') as file:
+        file.write(rag_string)
 else:
     print("Failed to process the JSON file.")

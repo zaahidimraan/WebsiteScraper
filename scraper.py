@@ -46,9 +46,6 @@ def scrape_website(url, visited_urls=None, max_depth=2, current_depth=0):
         print(f"Found {len(articles)} elements on the webpage.")
         
         for article in articles:
-            # Replace newline characters with spaces
-            article['title'].replace('\n', ' ')
-            article['summary'].replace('\n', ' ')
             # Extract information from each article (adjust selectors as needed)
             title = article.find(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']).text.strip() if article.find(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']) else 'No title'
             summary = article.find('p').text.strip() if article.find('p') else 'No summary'
@@ -65,6 +62,9 @@ def scrape_website(url, visited_urls=None, max_depth=2, current_depth=0):
                 'link': full_link
             }
             
+            # Replace newline characters with spaces
+            article_data['title']=article_data['title'].replace('\n', ' ')
+            article_data['summary']=article_data['summary'].replace('\n', ' ')
             # Add the article data to our list
             # Duplicate data check
             # summary and link are not 'No summary' and 'No link' respectively
