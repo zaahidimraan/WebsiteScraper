@@ -33,7 +33,11 @@ def json_to_rag_string(json_file_path):
             result += f"{article['summary']}. "
         # Add an extra space between articles for clarity
         result += " "
-
+    
+    # Remove extra . 
+    result = result.replace("..", ".")
+    result = result.replace("...", ".")
+    result = result.replace("....", ".")
     return result.strip()  # Remove trailing whitespace
 
 if __name__ == "__main__":
