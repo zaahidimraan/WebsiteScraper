@@ -13,11 +13,11 @@ st.title("Web Scraper")
 # Web Scraper Features
 st.markdown(
     """
-    This web scraper allows you to extract data from a website by providing the URL. 
-    You can specify the maximum depth for recursive scraping. 
-    The scraped data is displayed in a JSON format, which can be downloaded.
-    Duplicates are removed based on the title and summary of the articles.
-    You can download one text file of RAG String which can be used for RAG based chatbot.
+    This web scraper allows you to extract data from a website by providing the URL. \n
+    You can specify the maximum depth for recursive scraping. \n
+    The scraped data is displayed in a JSON format, which can be downloaded.\n
+    Duplicates are removed based on the title and summary of the articles. \n
+    You can download one text file of RAG String which can be used for RAG based chatbot. \n
     """
 )
 
@@ -34,18 +34,13 @@ if st.button("Scrape"):
     
     # Check if the request was successful
     if response.status_code == 200:
+        # Show processing message when scraping
+        info=st.info("Scraping the website... Please wait.")
         # Perform scraping
         scraped_data = scrape_website(url, max_depth=max_depth)
-
-        # Display scraped data
-        st.subheader("Scraped Data:")
-        st.write(scraped_data)
-        
-        # Display the RAG the string
         rag_string = json_to_rag_string("scraped_data.json")
-        st.subheader("RAG String:")
-        st.write(rag_string)
-
+        # Remove the processing message
+        info.empty()
         # Download button
         if scraped_data:
             json_data = json.dumps(scraped_data, indent=4)  # Convert to JSON
@@ -55,6 +50,9 @@ if st.button("Scrape"):
                 file_name="scraped_data.json",
                 mime="application/json",
             )
+        # Display scraped data
+        st.subheader("Scraped Data:")
+        st.write(scraped_data)
         if rag_string:
             st.download_button(
                 label="Download RAG String",
@@ -62,5 +60,9 @@ if st.button("Scrape"):
                 file_name="rag_string.txt",
                 mime="text/plain",
             )
+        # Display the RAG the string
+        st.subheader("RAG String:")
+        st.write(rag_string)
+
     else:
         st.warning("Please enter a valid URL.")
