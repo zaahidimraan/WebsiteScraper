@@ -9,6 +9,17 @@ import json
 # Streamlit App
 st.title("Web Scraper")
 
+# Web Scraper Features
+st.markdown(
+    """
+    This web scraper allows you to extract data from a website by providing the URL. 
+    You can specify the maximum depth for recursive scraping. 
+    The scraped data is displayed in a JSON format, which can be downloaded.
+    Duplicates are removed based on the title and summary of the articles.
+    You can download one text file which can be used for RAG based chatbot.
+    """
+)
+
 # URL input
 url = st.text_input("Enter the website URL to scrape:")
 
