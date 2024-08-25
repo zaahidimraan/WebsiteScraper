@@ -1,4 +1,5 @@
 from scraper import scrape_website
+from ragstringmaker import json_to_rag_string
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
@@ -16,7 +17,7 @@ st.markdown(
     You can specify the maximum depth for recursive scraping. 
     The scraped data is displayed in a JSON format, which can be downloaded.
     Duplicates are removed based on the title and summary of the articles.
-    You can download one text file which can be used for RAG based chatbot.
+    You can download one text file of RAG String which can be used for RAG based chatbot.
     """
 )
 
@@ -39,6 +40,11 @@ if st.button("Scrape"):
         # Display scraped data
         st.subheader("Scraped Data:")
         st.write(scraped_data)
+        
+        # Display the RAG the string
+        rag_string = json_to_rag_string("scraped_data.json")
+        st.subheader("RAG String:")
+        st.write(rag_string)
 
         # Download button
         if scraped_data:
@@ -48,6 +54,13 @@ if st.button("Scrape"):
                 data=json_data,
                 file_name="scraped_data.json",
                 mime="application/json",
+            )
+        if rag_string:
+            st.download_button(
+                label="Download RAG String",
+                data=rag_string,
+                file_name="rag_string.txt",
+                mime="text/plain",
             )
     else:
         st.warning("Please enter a valid URL.")

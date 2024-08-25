@@ -36,16 +36,17 @@ def json_to_rag_string(json_file_path):
 
     return result.strip()  # Remove trailing whitespace
 
-# Usage example
-json_file_path = "scraped_data.json"
-rag_string = json_to_rag_string(json_file_path)
+if __name__ == "__main__":
+    # Usage example
+    json_file_path = "scraped_data.json"
+    rag_string = json_to_rag_string(json_file_path)
 
-if rag_string:
-    print("RAG String Preview:")
-    print(rag_string[:500] + "..." if len(rag_string) > 500 else rag_string)
-    print(f"\nTotal characters: {len(rag_string)}")
-    # Save the RAG string to a text file
-    with open("rag_string.txt", 'w', encoding='utf-8') as file:
-        file.write(rag_string)
-else:
-    print("Failed to process the JSON file.")
+    if rag_string:
+        print("RAG String Preview:")
+        print(rag_string[:500] + "..." if len(rag_string) > 500 else rag_string)
+        print(f"\nTotal characters: {len(rag_string)}")
+        # Save the RAG string to a text file
+        with open("rag_string.txt", 'w', encoding='utf-8') as file:
+            file.write(rag_string)
+    else:
+        print("Failed to process the JSON file.")
