@@ -39,6 +39,9 @@ if st.button("Scrape"):
         # Perform scraping
         scraped_data = scrape_website(url, max_depth=max_depth)
         rag_string = json_to_rag_string("scraped_data.json")
+        # Save rag string as txt
+        with open("rag_string.txt", "w") as f:
+            f.write(rag_string)
         # Remove the processing message
         info.empty()
         # Download button
