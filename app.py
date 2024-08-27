@@ -38,6 +38,9 @@ if st.button("Scrape"):
         info=st.info("Scraping the website... Please wait.")
         # Perform scraping
         scraped_data = scrape_website(url, max_depth=max_depth)
+        # Write scraped_data to a JSON file
+        with open("scraped_data.json", "w", encoding='utf-8') as f:
+            json.dump(scraped_data, f, indent=4)
         rag_string = json_to_rag_string("scraped_data.json")
         # Save rag string as txt
         with open("rag_string.txt", "w", encoding='utf-8') as f:
